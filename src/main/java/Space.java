@@ -17,7 +17,7 @@ class Space {
         this.yd = yd;
     }
 
-    public boolean fitAny(Box box) {
+    public boolean fitAnyhow(Box box) {
         if (((xd < box.xd) || (yd < box.yd)) &&
                 ((yd < box.xd) || (xd < box.yd))) {
             return false;

@@ -5,6 +5,19 @@ class Box {
     int xd, yd;
     int x0,y0;
 
+    public void setContainer(int container) {
+        this.container = container;
+    }
+
+    int container = 0;
+
+    public boolean alreadyPlaced () {
+        return container != 0;
+    }
+
+    public boolean isUnplaced() {
+        return container == 0;
+    }
     public Box(int xd, int yd) {
         this.xd = xd;
         this.yd = yd;
