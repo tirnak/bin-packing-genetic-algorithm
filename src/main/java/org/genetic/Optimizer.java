@@ -1,13 +1,11 @@
-package genetic;
+package org.genetic;
 
-import model.Box;
+import org.model.Box;
 import org.apache.commons.math3.genetics.*;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 /**
@@ -21,13 +19,13 @@ public class Optimizer {
     private static final double ELITISM_RATE = 0.2;
     private static final double CROSSOVER_RATE = 1;
     private static final double MUTATION_RATE = 0.1;
-    private static final int TOURNAMENT_ARITY = 2;
+    private static final int TOURNAMENT_ARITY = 5;
 
-    public static void main(List<Box> boxes) {// initialize a new genetic algorithm
+    public static List<Box> main(List<Box> boxes) {// initialize a new org.genetic algorithm
         GeneticAlgorithm ga = new GeneticAlgorithm(
-                new OnePointCrossover<Integer>(),
+                new ReorderCrossover(),
                 CROSSOVER_RATE,
-                new RandomKeyMutation(),
+                new MoveToHeadMutation(),
                 MUTATION_RATE,
                 new TournamentSelection(TOURNAMENT_ARITY)
         );
@@ -38,14 +36,14 @@ public class Optimizer {
 
         Population finalPopulation = ga.evolve(initial, stopCond);
 
-        Chromosome bestFinal = finalPopulation.getFittestChromosome();
+        return ((BoxChromosome)finalPopulation.getFittestChromosome()).getRepresentation();
     }
 
     private static Population getInitialPopulation(List<Box> boxes) {
         List<Chromosome> popList = new LinkedList<>();
 
         for (int i=0; i<POPULATION_SIZE; i++) {
-            List<Box> newSequence = boxes.stream().map(Box::CloneNonApi).collect(Collectors.toList());
+                List<Box> newSequence = boxes.stream().map(Box::CloneNonApi).collect(Collectors.toList());
             Collections.shuffle(newSequence);
             popList.add(new BoxChromosome(newSequence));
         }

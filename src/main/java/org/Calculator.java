@@ -1,8 +1,10 @@
-import model.Area;
-import model.Box;
-import model.Space;
+package org;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.model.Area;
+import org.model.Box;
+import org.model.Space;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -10,8 +12,9 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Stream;
 
-class Calculator {
+public class Calculator {
     private static final Logger LOG = LogManager.getLogger(Calculator.class);
+    public static Calculator _instance;
     public int spacex;
     public int spacey;
 
@@ -71,6 +74,15 @@ class Calculator {
         }
 
         return containers.size();
+    }
+
+    public int calculateAndUnset (List<Box> boxesToPack) {
+        int result = calculate(boxesToPack);
+        for (Box box : boxesToPack) {
+            box.setContainer(-1);
+            box.setCoord(0,0);
+        }
+        return result;
     }
 
     private boolean boxesDontFit(List<Box> boxes) {

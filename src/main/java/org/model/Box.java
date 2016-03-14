@@ -1,4 +1,4 @@
-package model;
+package org.model;
 
 /**
  * Created by kirill on 12.03.16.
@@ -40,7 +40,7 @@ public class Box extends Area implements Cloneable {
 
     @Override
     public String toString() {
-        return "model.Box{" +
+        return "org.model.Box{" +
                 "xd=" + xd +
                 ", yd=" + yd +
                 ", x0=" + x0 +

@@ -8,8 +8,8 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="BoardMain" level="debug"/>
-        <Logger name="Calculator" level="debug"/>
+        <Logger name="org.BoardMain" level="debug"/>
+        <Logger name="org.Calculator" level="debug"/>
         <Root level="debug">
             <AppenderRef ref="STDOUT"/>
         </Root>

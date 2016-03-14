@@ -1,4 +1,4 @@
-package model;
+package org.model;
 
 /**
  * Created by kirill on 13.03.16.
@@ -56,5 +56,8 @@ abstract public class Area {
 
     public boolean equalsByArea(Area a) {
         return xd * yd == a.xd * a.yd;
+    }
+    public boolean equalsByDim(Area a) {
+        return xd == a.xd && yd == a.yd;
     }
 }

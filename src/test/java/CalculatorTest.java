@@ -1,5 +1,6 @@
-import model.Box;
-import model.Space;
+import org.model.Box;
+import org.model.Space;
+import org.Calculator;
 import org.junit.Before;
 
 import java.util.ArrayList;
@@ -99,7 +100,7 @@ public class CalculatorTest {
         spaces.add(new Space(0,0, 40, 100));
         spaces.add(new Space(0,0, 50, 100));
         spaces.add(new Space(0,0, 60, 100));
-        assertEquals(spaces.get(0), Calculator.findFittestSpace(spaces, new Box(8,90)));
+        assertEquals(spaces.get(0), Calculator.findFittestSpace(spaces, new Box(8, 90)));
         assertEquals(spaces.get(1), Calculator.findFittestSpace(spaces, new Box(18,90)));
         assertEquals(spaces.get(2), Calculator.findFittestSpace(spaces, new Box(28,90)));
         assertEquals(spaces.get(3), Calculator.findFittestSpace(spaces, new Box(38,90)));

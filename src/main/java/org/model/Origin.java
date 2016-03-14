@@ -1,4 +1,4 @@
-package model;
+package org.model;
 
 /**
  * Created by kirill on 12.03.16.
