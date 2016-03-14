@@ -75,7 +75,7 @@ class Calculator {
         return !boxes.stream().allMatch(tempSpace::fitAnyhow);
     }
 
-    private static boolean anyBoxFit (List<Space> spaces, List<Box> boxes) {
+    public static boolean anyBoxFit (List<Space> spaces, List<Box> boxes) {
         for (Space space : spaces) {
             for (Box box : boxes) {
                 if (box.alreadyPlaced()) {
@@ -95,7 +95,7 @@ class Calculator {
         int sy1 = space.yd - box.yd;
         int sx2 = space.xd - box.yd;
         int sy2 = space.yd - box.xd;
-        int minc = Stream.of(sx1, sx2, sy1, sy2).filter(i -> i>0).min(Integer::compare).get();
+        int minc = Stream.of(sx1, sx2, sy1, sy2).filter(i -> i >= 0).min(Integer::compare).get();
         if ((minc == sx2 || minc == sy2) && space.fitRotated(box)) {
             box.rotate();
         }
@@ -103,16 +103,19 @@ class Calculator {
         int xdd = space.xd - box.xd;
         int ydd = space.yd - box.yd;
         if (xdd > ydd) {
-            spaces.add(new Space(space.x0, space.y0 + box.yd, box.xd, space.yd - box.yd));
-            spaces.add(new Space(space.x0 + box.xd, space.y0, space.xd - box.xd, space.yd));
+            if (space.yd - box.yd > 0) {
+                spaces.add(new Space(space.x0, space.y0 + box.yd, box.xd, space.yd - box.yd)); }
+            if (space.xd - box.xd > 0) {
+                spaces.add(new Space(space.x0 + box.xd, space.y0, space.xd - box.xd, space.yd));}
         } else {
-            spaces.add(new Space(space.x0, space.y0 + box.yd, space.xd, space.yd - box.yd));
-            spaces.add(new Space(space.x0 + box.xd, space.y0, space.xd - box.xd, box.yd));
+            if (space.yd - box.yd > 0) {
+                spaces.add(new Space(space.x0, space.y0 + box.yd, space.xd, space.yd - box.yd));}
+            if (space.xd - box.xd > 0) {
+                spaces.add(new Space(space.x0 + box.xd, space.y0, space.xd - box.xd, box.yd));}
         }
         if (debug) {
             int areaExpected = space.getArea();
-            int areaActual = spaces.get(0).getArea() +
-                    spaces.get(1).getArea() +
+            int areaActual = spaces.stream().mapToInt(Area::getArea).sum() +
                     box.xd * box.yd;
             LOG.debug("expected: " + areaExpected + ", actual: " + areaActual);
         }

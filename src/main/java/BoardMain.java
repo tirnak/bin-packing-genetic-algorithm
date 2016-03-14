@@ -28,17 +28,17 @@ class BoardMain extends JComponent {
         window.setVisible(true);
 
         myComponent.boxes = new ArrayList<>();
-        myComponent.boxes.add(new Box(40,40));
-        myComponent.boxes.add(new Box(50,10));
-        myComponent.boxes.add(new Box(47,30));
-        myComponent.boxes.add(new Box(80,40));
-        myComponent.boxes.add(new Box(200,30));
+//        myComponent.boxes.add(new Box(40,40));
+//        myComponent.boxes.add(new Box(50,10));
+//        myComponent.boxes.add(new Box(47,30));
+//        myComponent.boxes.add(new Box(80,40));
+//        myComponent.boxes.add(new Box(200,30));
         Random random = new Random();
         for (int i = 0; i < 100; i++) {
             int x = (random.nextInt(10)+1) * 10;
             int y = (random.nextInt(10)+1) * 10;
             LOG.debug("x is " + x + ", y is " + y);
-//            myComponent.boxes.add(new Box(x,y));
+            myComponent.boxes.add(new Box(x,y));
         }
 
         Calculator calculator = new Calculator(spacexd,spaceyd);
@@ -49,7 +49,7 @@ class BoardMain extends JComponent {
         TimerTask taskPerformer = new TimerTask() {
             @Override
             public void run() {
-                if (myComponent.currentContainer > containers * 5) {
+                if (myComponent.currentContainer > containers * 4) {
                     System.exit(0);
                 }
                 myComponent.repaint();
@@ -67,7 +67,7 @@ class BoardMain extends JComponent {
 
         g.drawRect (c.x, c.y, spacexd, spaceyd);
         for (Box box : boxes) {
-            if ((box.container != currentContainer / 5)) {
+            if ((box.container != currentContainer / 4)) {
                 continue;
             }
             float red = rand.nextFloat();

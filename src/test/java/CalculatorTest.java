@@ -1,7 +1,9 @@
 import org.junit.Before;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static org.junit.Assert.*;
 
@@ -33,8 +35,57 @@ public class CalculatorTest {
         List<Space> remainings = Calculator.placeBox(space, box);
         Space s1 = new Space(0, 30, 20, 10);
         Space s2 = new Space(20, 0, 30, 40);
-        assertTrue(remainings.get(0).equals(s1) && remainings.get(1).equals(s2)
-                || remainings.get(1).equals(s1) && remainings.get(0).equals(s2));
+        assertTrue(remainings.get(0).equals(s1) && remainings.get(1).equals(s2));
+        assertFalse(remainings.get(0).intersects(remainings.get(1)));
+        assertFalse(remainings.get(0).intersects(box));
+        assertFalse(box.intersects(remainings.get(1)));
+
+        box = new Box(20, 30);
+        space = new Space(40, 40, 50, 50);
+        assertEquals(20, space.findMinSpace(box));
+        remainings = Calculator.placeBox(space, box);
+        s1 = new Space(40, 60, 50, 30);
+        s2 = new Space(70, 40, 20, 20);
+        assertTrue(remainings.get(0).equals(s1) && remainings.get(1).equals(s2));
+        assertFalse(remainings.get(0).intersects(remainings.get(1)));
+        assertFalse(remainings.get(0).intersects(box));
+        assertFalse(box.intersects(remainings.get(1)));
+
+    }
+
+    @org.junit.Test
+    public void testCalculate() {
+
+        List<Box> boxes = new ArrayList<>();
+        for (int i = 0; i < 35; i++) {
+            boxes.add(new Box(10, 10));
+        }
+        List<Box> localBoxesToPack = new CopyOnWriteArrayList<>(boxes);
+
+        Space currentContainer = new Space(0,0,60,60);
+            List<Space> tempSpaces = new LinkedList<>();
+            tempSpaces.add(currentContainer);
+
+            while (Calculator.anyBoxFit(tempSpaces, localBoxesToPack)) {
+                for (Box box: localBoxesToPack) {
+                    try {
+                        Space fittest = Calculator.findFittestSpace(tempSpaces, box);
+                        tempSpaces.remove(fittest);
+                        List<Space> remainings = Calculator.placeBox(fittest, box);
+                        box.setContainer(0);
+                        localBoxesToPack.remove(box);
+                        tempSpaces.addAll(remainings);
+                    } catch (RuntimeException e) {
+                        continue;
+                    }
+                }
+            }
+        for (Box boxi : boxes) {
+            for (Box boxj : boxes) {
+                if (boxi.equals(boxj)) {continue;}
+                assertFalse(boxi.intersects(boxj));
+            }
+        }
     }
 
     @org.junit.Test
