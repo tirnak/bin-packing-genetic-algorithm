@@ -1,11 +1,13 @@
+package model;
+
 /**
  * Created by kirill on 13.03.16.
  */
 abstract public class Area {
-    int xd;
-    int yd;
-    int x0;
-    int y0;
+    public int xd;
+    public int yd;
+    public int x0;
+    public int y0;
 
     public int getArea() {
         return xd * yd;

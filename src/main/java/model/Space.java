@@ -1,10 +1,12 @@
+package model;
+
 import java.util.Collections;
 import java.util.stream.Stream;
 
 /**
  * Created by kirill on 12.03.16.
  */
-class Space extends Area {
+public class Space extends Area {
 
     public Space(int x0, int y0, int xd, int yd) {
         this.x0 = x0;

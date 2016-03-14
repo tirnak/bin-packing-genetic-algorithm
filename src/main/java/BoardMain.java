@@ -1,3 +1,5 @@
+import model.*;
+import model.Box;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,10 +18,17 @@ class BoardMain extends JComponent {
     private static final BoardMain myComponent = new BoardMain();
     static int spacexd = 500;
     static int spaceyd = 500;
-    public java.util.List<Box> boxes;
+    public java.util.List<model.Box> boxes;
     int currentContainer = 0;
 
-    public static void main(String[] a) {
+    public static void main(String[] a) throws CloneNotSupportedException {
+    }
+
+    private static void genAlg() {
+
+    }
+
+    private static void justDraw() {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setBounds(20, 20, 1000, 1000);
@@ -28,17 +37,17 @@ class BoardMain extends JComponent {
         window.setVisible(true);
 
         myComponent.boxes = new ArrayList<>();
-//        myComponent.boxes.add(new Box(40,40));
-//        myComponent.boxes.add(new Box(50,10));
-//        myComponent.boxes.add(new Box(47,30));
-//        myComponent.boxes.add(new Box(80,40));
-//        myComponent.boxes.add(new Box(200,30));
+//        myComponent.boxes.add(new model.Box(40,40));
+//        myComponent.boxes.add(new model.Box(50,10));
+//        myComponent.boxes.add(new model.Box(47,30));
+//        myComponent.boxes.add(new model.Box(80,40));
+//        myComponent.boxes.add(new model.Box(200,30));
         Random random = new Random();
         for (int i = 0; i < 100; i++) {
             int x = (random.nextInt(10)+1) * 10;
             int y = (random.nextInt(10)+1) * 10;
             LOG.debug("x is " + x + ", y is " + y);
-            myComponent.boxes.add(new Box(x,y));
+            myComponent.boxes.add(new model.Box(x,y));
         }
 
         Calculator calculator = new Calculator(spacexd,spaceyd);
@@ -66,7 +75,7 @@ class BoardMain extends JComponent {
         Origin c = new Origin();
 
         g.drawRect (c.x, c.y, spacexd, spaceyd);
-        for (Box box : boxes) {
+        for (model.Box box : boxes) {
             if ((box.container != currentContainer / 4)) {
                 continue;
             }

@@ -1,3 +1,5 @@
+import model.Box;
+import model.Space;
 import org.junit.Before;
 
 import java.util.ArrayList;

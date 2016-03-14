@@ -1,13 +1,15 @@
+package model;
+
 /**
  * Created by kirill on 12.03.16.
  */
-class Box extends Area{
+public class Box extends Area implements Cloneable {
 
     public void setContainer(int container) {
         this.container = container;
     }
 
-    int container = -1;
+    public int container = -1;
 
     public boolean alreadyPlaced () {
         return container != -1;
@@ -38,11 +40,24 @@ class Box extends Area{
 
     @Override
     public String toString() {
-        return "Box{" +
+        return "model.Box{" +
                 "xd=" + xd +
                 ", yd=" + yd +
                 ", x0=" + x0 +
                 ", y0=" + y0 +
                 '}';
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public Box CloneNonApi() {
+        try {
+            return (Box) this.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -1,3 +1,6 @@
+import model.Area;
+import model.Box;
+import model.Space;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
