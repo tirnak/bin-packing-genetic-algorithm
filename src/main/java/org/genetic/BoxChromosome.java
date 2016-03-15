@@ -36,7 +36,7 @@ public class BoxChromosome extends AbstractListChromosome<Box> {
     protected void checkValidity(List<Box> list) throws InvalidRepresentationException {
         if (!list.stream().allMatch(b -> b != null)) {
             throw new InvalidRepresentationException(LocalizedFormats.ARGUMENT_OUTSIDE_DOMAIN);
-        };
+        }
     }
 
     @Override
@@ -46,7 +46,6 @@ public class BoxChromosome extends AbstractListChromosome<Box> {
 
     /**
      * deeply copies representation
-     * @return
      */
     @Override
     public List<Box> getRepresentation() {
@@ -55,9 +54,12 @@ public class BoxChromosome extends AbstractListChromosome<Box> {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * the more - the worse
+     */
     @Override
     public double fitness() {
         Calculator calculator = Calculator._instance;
-        return calculator.calculateAndUnset(getRepresentation());
+        return 1 / calculator.calculateAndUnset(getRepresentation());
     }
 }

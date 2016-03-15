@@ -17,8 +17,8 @@ class BoardMain extends JComponent {
 
     private static final Logger LOG = LogManager.getLogger(BoardMain.class);
     private static final BoardMain myComponent = new BoardMain();
-    static int spacexd = 500;
-    static int spaceyd = 500;
+    static int spacexd = 150;
+    static int spaceyd = 400;
     public java.util.List<org.model.Box> boxes;
     int currentContainer = 0;
 
@@ -28,27 +28,42 @@ class BoardMain extends JComponent {
 
     private static void genAlg() {
         JFrame window = new JFrame();
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setBounds(20, 20, 1000, 1000);
 
         window.getContentPane().add(myComponent);
         window.setVisible(true);
 
         myComponent.boxes = new ArrayList<>();
-//        myComponent.boxes.add(new org.model.Box(40,40));
-//        myComponent.boxes.add(new org.model.Box(50,10));
-//        myComponent.boxes.add(new org.model.Box(47,30));
-//        myComponent.boxes.add(new org.model.Box(80,40));
-//        myComponent.boxes.add(new org.model.Box(200,30));
-        Random random = new Random();
-        for (int i = 0; i < 100; i++) {
-            int x = (random.nextInt(10)+1) * 10;
-            int y = (random.nextInt(10)+1) * 10;
-            LOG.debug(() -> "x is " + x + ", y is " + y);
-            myComponent.boxes.add(new org.model.Box(x,y));
-        }
+        myComponent.boxes.add(new org.model.Box(40,40));
+        myComponent.boxes.add(new org.model.Box(50,10));
+        myComponent.boxes.add(new org.model.Box(47,30));
+        myComponent.boxes.add(new org.model.Box(80,40));
+        myComponent.boxes.add(new org.model.Box(80,40));
+        myComponent.boxes.add(new org.model.Box(80,40));
+        myComponent.boxes.add(new org.model.Box(200,30));
+        myComponent.boxes.add(new org.model.Box(80,40));
+        myComponent.boxes.add(new org.model.Box(80,40));
+        myComponent.boxes.add(new org.model.Box(80,40));
+        myComponent.boxes.add(new org.model.Box(200,30));
+        myComponent.boxes.add(new org.model.Box(80,40));
+        myComponent.boxes.add(new org.model.Box(80,40));
+        myComponent.boxes.add(new org.model.Box(80,40));
+        myComponent.boxes.add(new org.model.Box(200,30));
+        myComponent.boxes.add(new org.model.Box(47,30));
+        myComponent.boxes.add(new org.model.Box(80,40));
+        myComponent.boxes.add(new org.model.Box(80,40));
+        myComponent.boxes.add(new org.model.Box(80,40));
+        myComponent.boxes.add(new org.model.Box(200,30));
+//        Random random = new Random();
+//        for (int i = 0; i < 75; i++) {
+//            int x = (random.nextInt(10)+1) * 10;
+//            int y = (random.nextInt(10)+1) * 10;
+//            LOG.debug(() -> "x is " + x + ", y is " + y);
+//            myComponent.boxes.add(new org.model.Box(x,y));
+//        }
 
-        Calculator._instance = new Calculator(spacexd, spacexd);
+        Calculator._instance = new Calculator(spacexd, spaceyd);
         myComponent.boxes = Optimizer.main(myComponent.boxes);
         int containers = Calculator._instance.calculate(myComponent.boxes);
         LOG.debug(() -> containers + " containers needed");
@@ -71,7 +86,7 @@ class BoardMain extends JComponent {
 
     private static void justDraw() {
         JFrame window = new JFrame();
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setBounds(20, 20, 1000, 1000);
 
         window.getContentPane().add(myComponent);
@@ -84,7 +99,7 @@ class BoardMain extends JComponent {
 //        myComponent.boxes.add(new org.model.Box(80,40));
 //        myComponent.boxes.add(new org.model.Box(200,30));
         Random random = new Random();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 50; i++) {
             int x = (random.nextInt(10)+1) * 10;
             int y = (random.nextInt(10)+1) * 10;
             LOG.debug(() -> "x is " + x + ", y is " + y);

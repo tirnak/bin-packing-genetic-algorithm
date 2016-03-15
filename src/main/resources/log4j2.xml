@@ -8,9 +8,9 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="org.BoardMain" level="error"/>
+        <Logger name="org.BoardMain" level="debug"/>
         <Logger name="org.Calculator" level="error"/>
-        <Root level="error">
+        <Root level="debug">
             <AppenderRef ref="STDOUT"/>
         </Root>
     </Loggers>

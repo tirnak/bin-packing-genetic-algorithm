@@ -15,7 +15,7 @@ public class Optimizer {
 
     private static final int DIMENSION = 50;
     private static final int POPULATION_SIZE = 50;
-    private static final int NUM_GENERATIONS = 100;
+    private static final int NUM_GENERATIONS = 500;
     private static final double ELITISM_RATE = 0.2;
     private static final double CROSSOVER_RATE = 1;
     private static final double MUTATION_RATE = 0.1;

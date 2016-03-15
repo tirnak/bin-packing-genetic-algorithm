@@ -30,12 +30,7 @@ abstract public class Area {
     }
 
     public boolean fitAnyhow(Area area) {
-        if (((xd < area.xd) || (yd < area.yd)) &&
-                ((yd < area.xd) || (xd < area.yd))) {
-            return false;
-        } else {
-            return true;
-        }
+        return fit(area) || fitRotated(area);
     }
 
     public boolean fit(Area area) {
