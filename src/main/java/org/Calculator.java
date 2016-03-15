@@ -67,7 +67,7 @@ public class Calculator {
                         continue;
                     }
                     if (boxi.intersects(boxj)) {
-                        LOG.debug("Achtung! " + boxi + " intersects with " + boxj);
+                        LOG.error(() -> "Achtung! " + boxi + " intersects with " + boxj);
                     }
                 }
             }
@@ -132,7 +132,7 @@ public class Calculator {
             int areaExpected = space.getArea();
             int areaActual = spaces.stream().mapToInt(Area::getArea).sum() +
                     box.xd * box.yd;
-            LOG.debug("expected: " + areaExpected + ", actual: " + areaActual);
+            LOG.debug(() -> "expected: " + areaExpected + ", actual: " + areaActual);
         }
         return spaces;
     }

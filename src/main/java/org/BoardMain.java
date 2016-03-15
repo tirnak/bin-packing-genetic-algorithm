@@ -44,14 +44,14 @@ class BoardMain extends JComponent {
         for (int i = 0; i < 100; i++) {
             int x = (random.nextInt(10)+1) * 10;
             int y = (random.nextInt(10)+1) * 10;
-            LOG.debug("x is " + x + ", y is " + y);
+            LOG.debug(() -> "x is " + x + ", y is " + y);
             myComponent.boxes.add(new org.model.Box(x,y));
         }
 
         Calculator._instance = new Calculator(spacexd, spacexd);
         myComponent.boxes = Optimizer.main(myComponent.boxes);
         int containers = Calculator._instance.calculate(myComponent.boxes);
-        LOG.debug(containers + " containers needed");
+        LOG.debug(() -> containers + " containers needed");
         int delay = 1000; //milliseconds
 
         TimerTask taskPerformer = new TimerTask() {
@@ -61,7 +61,7 @@ class BoardMain extends JComponent {
                     System.exit(0);
                 }
                 myComponent.repaint();
-                LOG.debug("currentContainer " + myComponent.currentContainer);
+                LOG.debug(() ->"currentContainer " + myComponent.currentContainer);
             }
         };
 
@@ -87,13 +87,13 @@ class BoardMain extends JComponent {
         for (int i = 0; i < 100; i++) {
             int x = (random.nextInt(10)+1) * 10;
             int y = (random.nextInt(10)+1) * 10;
-            LOG.debug("x is " + x + ", y is " + y);
+            LOG.debug(() -> "x is " + x + ", y is " + y);
             myComponent.boxes.add(new org.model.Box(x,y));
         }
 
         Calculator calculator = new Calculator(spacexd,spaceyd);
         int containers = calculator.calculate(myComponent.boxes);
-        LOG.debug(containers + " containers needed");
+        LOG.debug(() -> containers + " containers needed");
         int delay = 1000; //milliseconds
 
         TimerTask taskPerformer = new TimerTask() {
@@ -103,7 +103,7 @@ class BoardMain extends JComponent {
                     System.exit(0);
                 }
                 myComponent.repaint();
-                LOG.debug("currentContainer " + myComponent.currentContainer);
+                LOG.debug(() -> "currentContainer " + myComponent.currentContainer);
             }
         };
 

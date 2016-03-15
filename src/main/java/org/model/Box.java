@@ -1,15 +1,20 @@
 package org.model;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Created by kirill on 12.03.16.
  */
 public class Box extends Area implements Cloneable {
 
+    public final int id;
+    private static AtomicInteger indexer = new AtomicInteger();
+
+    public int container = -1;
+
     public void setContainer(int container) {
         this.container = container;
     }
-
-    public int container = -1;
 
     public boolean alreadyPlaced () {
         return container != -1;
@@ -20,6 +25,13 @@ public class Box extends Area implements Cloneable {
     }
 
     public Box(int xd, int yd) {
+        id = indexer.getAndIncrement();
+        this.xd = xd;
+        this.yd = yd;
+    }
+
+    public Box(int xd, int yd, int id) {
+        this.id = id;
         this.xd = xd;
         this.yd = yd;
     }
@@ -59,5 +71,21 @@ public class Box extends Area implements Cloneable {
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Box box = (Box) o;
+
+        return id == box.id;
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }

@@ -23,7 +23,7 @@ public class Optimizer {
 
     public static List<Box> main(List<Box> boxes) {// initialize a new org.genetic algorithm
         GeneticAlgorithm ga = new GeneticAlgorithm(
-                new ReorderCrossover(),
+                new OrderedCrossover<>(),
                 CROSSOVER_RATE,
                 new MoveToHeadMutation(),
                 MUTATION_RATE,
